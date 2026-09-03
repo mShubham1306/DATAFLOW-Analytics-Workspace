@@ -1,8 +1,10 @@
 import axios from 'axios';
 
-// In production (Vercel), VITE_API_URL points to the Render backend.
-// In development, Vite's proxy forwards /api -> http://127.0.0.1:8000.
-const BACKEND = import.meta.env.VITE_API_URL || '';
+// In production, use VITE_API_URL or default to the deployed Render backend URL.
+// In local dev, Vite proxy routes /api to http://127.0.0.1:8000.
+const BACKEND =
+  import.meta.env.VITE_API_URL ||
+  (import.meta.env.PROD ? 'https://dataflow-analytics-workspace.onrender.com' : '');
 const API_BASE = `${BACKEND}/api/imports`;
 
 export const uploadCsv = async (file) => {
