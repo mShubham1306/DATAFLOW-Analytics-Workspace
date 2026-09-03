@@ -14,17 +14,22 @@ app = FastAPI(
 )
 
 # ALLOWED_ORIGIN: comma-separated list of frontend origins.
-# In production set via Render env var. Defaults to localhost for dev.
+# Set to "*" to allow all origins (useful during initial deployment).
+# In production, restrict to your Vercel URL e.g.: https://my-app.vercel.app
 _raw_origins = os.getenv(
     "ALLOWED_ORIGIN",
     "http://localhost:5173,http://localhost:3000,http://127.0.0.1:5173"
 )
-allowed_origins = [o.strip() for o in _raw_origins.split(",") if o.strip()]
+
+if _raw_origins.strip() == "*":
+    allowed_origins = ["*"]
+else:
+    allowed_origins = [o.strip() for o in _raw_origins.split(",") if o.strip()]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=allowed_origins,
-    allow_credentials=True,
+    allow_credentials=allowed_origins != ["*"],  # credentials not allowed with wildcard
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -32,7 +37,19 @@ app.add_middleware(
 app.include_router(imports.router)
 
 
+@app.get("/", tags=["Root"])
+def root():
+    return {
+        "status": "online",
+        "service": "DATAFLOW Analytics Backend API",
+        "docs": "/docs",
+        "health": "/api/health",
+        "version": "1.0.0"
+    }
+
+
 @app.get("/api/health", tags=["Health"])
 def health_check():
     return {"status": "ok", "service": "CSV Importer API"}
+
 

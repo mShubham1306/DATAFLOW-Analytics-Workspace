@@ -12,5 +12,5 @@ services:
       - key: DATABASE_URL
         value: sqlite:///./imports.db   # Ephemeral on free tier — replace with Render Postgres if you need persistence across restarts
       - key: ALLOWED_ORIGIN
-        value: https://dataflow-analytics-workspace.vercel.app  # Update after Vercel deployment
+        value: "*"
     healthCheckPath: /api/health
