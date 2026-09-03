@@ -22,7 +22,7 @@ export const DataExplorer = ({
   const end = Math.min(page * limit, total);
 
   return (
-    <div className="bg-white border border-[#E5E7EB] rounded-2xl p-6 shadow-2xs">
+    <div className="bg-white border border-[#E5E7EB] rounded-2xl p-3 sm:p-6 shadow-2xs min-w-0">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
           <h3 className="text-base font-bold text-[#111827]">Data Explorer</h3>
@@ -32,8 +32,8 @@ export const DataExplorer = ({
         </div>
 
         {/* Search Input & Status Filter */}
-        <div className="flex flex-wrap items-center gap-3">
-          <div className="relative min-w-[240px]">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
+          <div className="relative w-full sm:w-60 sm:min-w-0">
             <Search className="w-4 h-4 text-[#6B7280] absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
@@ -52,7 +52,7 @@ export const DataExplorer = ({
             )}
           </div>
 
-          <div className="flex items-center p-1 rounded-xl bg-[#F3F4F6] border border-[#E5E7EB] text-xs">
+          <div className="flex items-center justify-center p-1 rounded-xl bg-[#F3F4F6] border border-[#E5E7EB] text-xs">
             <button
               onClick={() => onStatusFilterChange('all')}
               className={`px-3 py-1 rounded-lg font-semibold transition ${
@@ -101,7 +101,7 @@ export const DataExplorer = ({
         </div>
       ) : (
         <div className="overflow-x-auto rounded-xl border border-[#E5E7EB]">
-          <table className="w-full text-left text-xs text-[#374151]">
+          <table className="min-w-[860px] w-full text-left text-xs text-[#374151]">
             <thead className="bg-[#F9FAFB] text-[#6B7280] font-bold uppercase tracking-wider text-[10px] border-b border-[#E5E7EB]">
               <tr>
                 <th className="py-3 px-3.5 w-14 text-center">Row</th>

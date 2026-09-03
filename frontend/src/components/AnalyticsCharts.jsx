@@ -27,7 +27,7 @@ export const AnalyticsCharts = ({ analytics }) => {
   const maxCityCount = Math.max(...records_by_city.map((c) => c.total), 1);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 min-w-0">
       {/* Row 1: Donut + Validation Issues */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Chart 1: Validation Status Donut */}
@@ -339,13 +339,13 @@ export const AnalyticsCharts = ({ analytics }) => {
             {records_by_city.map((c, idx) => (
               <div
                 key={c.city}
-                className="flex items-center justify-between p-2.5 rounded-xl bg-[#F9FAFB] border border-[#E5E7EB] text-xs"
+                className="flex flex-wrap items-center justify-between gap-2 p-2.5 rounded-xl bg-[#F9FAFB] border border-[#E5E7EB] text-xs"
               >
-                <div className="flex items-center gap-2.5">
+                <div className="flex items-center gap-2.5 min-w-0">
                   <span className="w-5 h-5 rounded-full bg-white border border-[#E5E7EB] flex items-center justify-center font-bold text-[10px] text-[#6B7280]">
                     {idx + 1}
                   </span>
-                  <span className="font-semibold text-[#111827]">{c.city}</span>
+                  <span className="font-semibold text-[#111827] truncate">{c.city}</span>
                   <span className="text-[#6B7280] text-[11px]">({c.total} records)</span>
                 </div>
                 <div className="flex items-center gap-2">

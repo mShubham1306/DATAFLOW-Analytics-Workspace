@@ -32,14 +32,14 @@ export const GlobalFilterBar = ({
         </div>
 
         {/* Filter Select Controls */}
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="grid grid-cols-1 min-[420px]:grid-cols-2 lg:flex lg:flex-wrap items-stretch gap-2.5 w-full lg:w-auto">
           {/* Company Filter */}
-          <div className="flex items-center gap-1.5 bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl px-2.5 py-1.5 text-xs text-[#374151]">
+          <div className="flex items-center min-w-0 gap-1.5 bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl px-2.5 py-1.5 text-xs text-[#374151]">
             <Building2 className="w-3.5 h-3.5 text-[#6B7280]" />
             <select
               value={filters.company}
               onChange={(e) => onFilterChange('company', e.target.value)}
-              className="bg-transparent border-none text-xs text-[#111827] font-medium focus:outline-none cursor-pointer max-w-[140px] truncate"
+              className="bg-transparent border-none text-xs text-[#111827] font-medium focus:outline-none cursor-pointer min-w-0 w-full truncate"
             >
               <option value="all">All Companies</option>
               {availableCompanies.map((comp) => (
@@ -51,12 +51,12 @@ export const GlobalFilterBar = ({
           </div>
 
           {/* City Filter */}
-          <div className="flex items-center gap-1.5 bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl px-2.5 py-1.5 text-xs text-[#374151]">
+          <div className="flex items-center min-w-0 gap-1.5 bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl px-2.5 py-1.5 text-xs text-[#374151]">
             <MapPin className="w-3.5 h-3.5 text-[#6B7280]" />
             <select
               value={filters.city}
               onChange={(e) => onFilterChange('city', e.target.value)}
-              className="bg-transparent border-none text-xs text-[#111827] font-medium focus:outline-none cursor-pointer max-w-[140px] truncate"
+              className="bg-transparent border-none text-xs text-[#111827] font-medium focus:outline-none cursor-pointer min-w-0 w-full truncate"
             >
               <option value="all">All Cities</option>
               {availableCities.map((city) => (
@@ -68,7 +68,7 @@ export const GlobalFilterBar = ({
           </div>
 
           {/* Status Filter */}
-          <div className="flex items-center gap-1.5 bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl px-2.5 py-1.5 text-xs text-[#374151]">
+          <div className="flex items-center min-w-0 gap-1.5 bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl px-2.5 py-1.5 text-xs text-[#374151]">
             <select
               value={filters.status}
               onChange={(e) => onFilterChange('status', e.target.value)}
@@ -82,12 +82,12 @@ export const GlobalFilterBar = ({
 
           {/* Error Type Filter */}
           {availableErrors.length > 0 && (
-            <div className="flex items-center gap-1.5 bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl px-2.5 py-1.5 text-xs text-[#374151]">
+            <div className="flex items-center min-w-0 gap-1.5 bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl px-2.5 py-1.5 text-xs text-[#374151]">
               <AlertTriangle className="w-3.5 h-3.5 text-[#F59E0B]" />
               <select
                 value={filters.errorType}
                 onChange={(e) => onFilterChange('errorType', e.target.value)}
-                className="bg-transparent border-none text-xs text-[#111827] font-medium focus:outline-none cursor-pointer max-w-[140px] truncate"
+                className="bg-transparent border-none text-xs text-[#111827] font-medium focus:outline-none cursor-pointer min-w-0 w-full truncate"
               >
                 <option value="all">All Issues</option>
                 {availableErrors.map((err) => (
@@ -103,7 +103,7 @@ export const GlobalFilterBar = ({
           {hasActiveFilters && (
             <button
               onClick={onResetFilters}
-              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-white border border-[#E5E7EB] hover:bg-[#F3F4F6] text-[#DC2626] text-xs font-semibold transition"
+              className="inline-flex items-center justify-center gap-1 px-3 py-1.5 rounded-xl bg-white border border-[#E5E7EB] hover:bg-[#F3F4F6] text-[#DC2626] text-xs font-semibold transition"
             >
               <X className="w-3.5 h-3.5" /> Reset
             </button>

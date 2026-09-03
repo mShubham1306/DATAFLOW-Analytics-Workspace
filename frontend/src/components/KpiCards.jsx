@@ -26,7 +26,7 @@ export const KpiCards = ({ summary }) => {
   const qualityBadge = getQualityBadge(qualityScore);
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3 mb-6">
+    <div className="grid grid-cols-1 min-[360px]:grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3 mb-6">
       {/* 1. Total */}
       <div className="bg-white border border-[#E5E7EB] rounded-2xl p-4 shadow-2xs">
         <div className="flex items-center justify-between text-[#6B7280] mb-2">

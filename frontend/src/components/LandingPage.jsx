@@ -114,13 +114,13 @@ export const LandingPage = ({ onUploadSuccess }) => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
+    <div className="max-w-4xl mx-auto px-0 sm:px-4 py-6 sm:py-12">
       {/* Hero Section */}
       <div className="text-center mb-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EFF6FF] border border-[#DBEAFE] text-[#2563EB] text-xs font-bold uppercase tracking-wider mb-4">
           <Zap className="w-3.5 h-3.5" /> Data Ingestion & Quality Platform
         </div>
-        <h1 className="text-3xl sm:text-5xl font-black text-[#111827] tracking-tight leading-tight">
+        <h1 className="text-3xl sm:text-5xl font-black text-[#111827] tracking-tight leading-tight break-words">
           Turn messy CSV data into <br />
           <span className="text-[#2563EB]">actionable insights.</span>
         </h1>
@@ -130,14 +130,14 @@ export const LandingPage = ({ onUploadSuccess }) => {
       </div>
 
       {/* Upload Drop Zone */}
-      <div className="bg-white border border-[#E5E7EB] rounded-3xl p-8 shadow-sm">
+      <div className="bg-white border border-[#E5E7EB] rounded-3xl p-3 sm:p-8 shadow-sm">
         <div
           onDragEnter={handleDrag}
           onDragOver={handleDrag}
           onDragLeave={handleDrag}
           onDrop={handleDrop}
           onClick={() => fileInputRef.current?.click()}
-          className={`border-2 border-dashed rounded-2xl p-10 text-center cursor-pointer transition-all duration-200 ${
+          className={`border-2 border-dashed rounded-2xl p-6 sm:p-10 text-center cursor-pointer transition-all duration-200 ${
             dragActive
               ? 'border-[#2563EB] bg-[#EFF6FF]'
               : 'border-[#D1D5DB] hover:border-[#2563EB] hover:bg-[#F9FAFB]'
@@ -169,7 +169,7 @@ export const LandingPage = ({ onUploadSuccess }) => {
               </p>
             </div>
 
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[#F3F4F6] text-[11px] text-[#6B7280] font-mono">
+            <div className="flex max-w-full items-start justify-center gap-2 px-3 py-1 rounded-lg bg-[#F3F4F6] text-[11px] text-[#6B7280] font-mono break-words">
               <FileText className="w-3.5 h-3.5" />
               CSV • Max 50 MB • Columns: name, email, phone, company, city
             </div>
@@ -185,7 +185,7 @@ export const LandingPage = ({ onUploadSuccess }) => {
             type="button"
             onClick={handleLoadSample}
             disabled={uploading}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#EFF6FF] hover:bg-[#DBEAFE] border border-[#BFDBFE] text-[#2563EB] text-xs font-bold transition disabled:opacity-50 shadow-2xs"
+            className="inline-flex max-w-full items-center justify-center gap-2 px-4 py-2 rounded-xl bg-[#EFF6FF] hover:bg-[#DBEAFE] border border-[#BFDBFE] text-[#2563EB] text-xs font-bold transition disabled:opacity-50 shadow-2xs"
           >
             <Play className="w-3.5 h-3.5 fill-current" />
             1-Click Load Sample Dataset (sample.csv)
@@ -205,7 +205,7 @@ export const LandingPage = ({ onUploadSuccess }) => {
       </div>
 
       {/* Feature Pillars */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+      <div className="grid grid-cols-1 min-[420px]:grid-cols-2 md:grid-cols-4 gap-4 mt-8">
         <div className="p-4 rounded-2xl bg-white border border-[#E5E7EB] text-center shadow-2xs">
           <div className="w-8 h-8 rounded-xl bg-[#DCFCE7] text-[#16A34A] flex items-center justify-center mx-auto mb-2">
             <CheckCircle2 className="w-4 h-4" />

@@ -9,6 +9,7 @@ import { AnalyticsCharts } from './components/AnalyticsCharts';
 import { DataExplorer } from './components/DataExplorer';
 import { ImportHistoryView } from './components/ImportHistoryView';
 import { getImportHistory, getJobStatus, getJobAnalytics, getJobRecords } from './api/importsApi';
+import { Menu } from 'lucide-react';
 
 export function App() {
   const [currentView, setCurrentView] = useState('overview'); // 'overview' | 'import' | 'explorer' | 'history'
@@ -26,6 +27,7 @@ export function App() {
   const [totalRecords, setTotalRecords] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const [search, setSearch] = useState('');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Global filters affecting entire dashboard
   const [filters, setFilters] = useState({
@@ -184,6 +186,8 @@ export function App() {
         onViewChange={setCurrentView}
         activeJob={activeJob}
         onSelectJob={handleSelectJob}
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
       />
 
       {/* Main Right Content Panel */}
@@ -191,6 +195,7 @@ export function App() {
         {/* Top Navbar */}
         <TopNavbar
           activeJob={activeJob}
+          onMenu={() => setSidebarOpen(true)}
           onNewImport={() => setCurrentView('import')}
           onRefresh={() => {
             fetchAnalytics();
@@ -199,7 +204,7 @@ export function App() {
         />
 
         {/* Dynamic Page Views */}
-        <main className="flex-1 p-6 max-w-7xl w-full mx-auto">
+        <main className="flex-1 min-w-0 p-3 sm:p-4 lg:p-6 max-w-7xl w-full mx-auto">
           {/* VIEW 1: IMPORT / LANDING PAGE */}
           {currentView === 'import' && (
             <LandingPage onUploadSuccess={handleUploadSuccess} />

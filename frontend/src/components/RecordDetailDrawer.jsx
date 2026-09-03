@@ -9,14 +9,14 @@ export const RecordDetailDrawer = ({ record, onClose }) => {
       <div className="w-full max-w-md bg-white h-full shadow-2xl flex flex-col justify-between animate-in slide-in-from-right duration-200">
         <div>
           {/* Drawer Header */}
-          <div className="p-6 border-b border-[#E5E7EB] flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
+          <div className="p-4 sm:p-6 border-b border-[#E5E7EB] flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2.5 min-w-0">
               <span className="w-8 h-8 rounded-lg bg-[#F3F4F6] text-[#374151] flex items-center justify-center font-mono font-bold text-xs">
                 #{record.row_number}
               </span>
-              <div>
-                <h3 className="text-base font-bold text-[#111827]">Record Inspector</h3>
-                <p className="text-xs text-[#6B7280]">Row #{record.row_number} from CSV file</p>
+              <div className="min-w-0">
+                <h3 className="text-base font-bold text-[#111827] truncate">Record Inspector</h3>
+                <p className="text-xs text-[#6B7280] truncate">Row #{record.row_number} from CSV file</p>
               </div>
             </div>
             <button
@@ -28,8 +28,8 @@ export const RecordDetailDrawer = ({ record, onClose }) => {
           </div>
 
           {/* Validity Status Banner */}
-          <div className="p-6 border-b border-[#E5E7EB] bg-[#F9FAFB]">
-            <div className="flex items-center justify-between">
+          <div className="p-4 sm:p-6 border-b border-[#E5E7EB] bg-[#F9FAFB]">
+            <div className="flex flex-wrap items-center justify-between gap-2">
               <span className="text-xs font-semibold text-[#6B7280] uppercase tracking-wider">Validation Status</span>
               {record.is_valid ? (
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#DCFCE7] text-[#16A34A] border border-[#BBF7D0]">
@@ -67,7 +67,7 @@ export const RecordDetailDrawer = ({ record, onClose }) => {
           </div>
 
           {/* Record Attributes Fields */}
-          <div className="p-6 space-y-4">
+          <div className="p-4 sm:p-6 space-y-4 overflow-y-auto">
             <h4 className="text-xs font-bold text-[#111827] uppercase tracking-wider">Customer Attributes</h4>
 
             {/* Name */}
@@ -128,7 +128,7 @@ export const RecordDetailDrawer = ({ record, onClose }) => {
         </div>
 
         {/* Drawer Footer */}
-        <div className="p-6 border-t border-[#E5E7EB] bg-[#F9FAFB]">
+        <div className="p-4 sm:p-6 border-t border-[#E5E7EB] bg-[#F9FAFB]">
           <button
             onClick={onClose}
             className="w-full py-2.5 rounded-xl bg-white border border-[#E5E7EB] hover:bg-[#F3F4F6] text-xs font-bold text-[#374151] transition shadow-2xs"

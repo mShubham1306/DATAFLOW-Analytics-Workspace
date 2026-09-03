@@ -26,8 +26,8 @@ export const ImportHistoryView = ({ jobs = [], onSelectJob, onRefresh }) => {
   };
 
   return (
-    <div className="bg-white border border-[#E5E7EB] rounded-2xl p-6 shadow-2xs">
-      <div className="flex items-center justify-between mb-6">
+    <div className="bg-white border border-[#E5E7EB] rounded-2xl p-3 sm:p-6 shadow-2xs min-w-0">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
         <div>
           <h3 className="text-base font-bold text-[#111827]">Import History</h3>
           <p className="text-xs text-[#6B7280]">
@@ -47,7 +47,7 @@ export const ImportHistoryView = ({ jobs = [], onSelectJob, onRefresh }) => {
         </div>
       ) : (
         <div className="overflow-x-auto rounded-xl border border-[#E5E7EB]">
-          <table className="w-full text-left text-xs text-[#374151]">
+          <table className="min-w-[900px] w-full text-left text-xs text-[#374151]">
             <thead className="bg-[#F9FAFB] text-[#6B7280] font-bold uppercase tracking-wider text-[10px] border-b border-[#E5E7EB]">
               <tr>
                 <th className="py-3 px-4">Dataset Name</th>

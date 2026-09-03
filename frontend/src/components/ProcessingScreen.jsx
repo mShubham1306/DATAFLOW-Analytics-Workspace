@@ -8,13 +8,13 @@ export const ProcessingScreen = ({ job }) => {
   const percent = total > 0 ? Math.min(100, Math.round((processed / total) * 100)) || 65 : 45;
 
   return (
-    <div className="max-w-2xl mx-auto my-16 p-8 bg-white border border-[#E5E7EB] rounded-2xl shadow-sm">
-      <div className="flex items-center gap-3 pb-6 border-b border-[#E5E7EB]">
+    <div className="max-w-2xl mx-auto my-6 sm:my-16 p-4 sm:p-8 bg-white border border-[#E5E7EB] rounded-2xl shadow-sm">
+      <div className="flex items-center gap-3 pb-6 border-b border-[#E5E7EB] min-w-0">
         <div className="w-10 h-10 rounded-xl bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center">
           <FileSpreadsheet className="w-5 h-5" />
         </div>
-        <div>
-          <h3 className="text-lg font-bold text-[#111827]">
+        <div className="min-w-0">
+          <h3 className="text-base sm:text-lg font-bold text-[#111827] break-words">
             {isFailed ? 'Import Failed' : `Ingesting ${job?.filename || 'dataset.csv'}`}
           </h3>
           <p className="text-xs text-[#6B7280]">

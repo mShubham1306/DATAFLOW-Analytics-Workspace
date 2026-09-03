@@ -1,7 +1,7 @@
 import React from 'react';
-import { LayoutDashboard, UploadCloud, History, Table, Database, CheckCircle2, ChevronRight, FileSpreadsheet } from 'lucide-react';
+import { LayoutDashboard, UploadCloud, History, Table, FileSpreadsheet, X } from 'lucide-react';
 
-export const Sidebar = ({ currentView, onViewChange, activeJob, onSelectJob }) => {
+export const Sidebar = ({ currentView, onViewChange, activeJob, onSelectJob, isOpen, onClose }) => {
   const navItems = [
     { id: 'overview', label: 'Overview', icon: LayoutDashboard, badge: activeJob ? 'Active' : null },
     { id: 'import', label: 'Import', icon: UploadCloud },
@@ -9,23 +9,33 @@ export const Sidebar = ({ currentView, onViewChange, activeJob, onSelectJob }) =
     { id: 'history', label: 'History', icon: History },
   ];
 
+  const handleViewChange = (view) => {
+    onViewChange(view);
+    onClose?.();
+  };
+
   return (
-    <aside className="w-64 bg-white border-r border-[#E5E7EB] flex flex-col justify-between shrink-0 min-h-screen">
+    <>
+      {isOpen && <button aria-label="Close navigation" onClick={onClose} className="fixed inset-0 z-40 bg-[#111827]/30 lg:hidden" />}
+      <aside className={`fixed inset-y-0 left-0 z-50 w-72 max-w-[calc(100vw-2rem)] bg-white border-r border-[#E5E7EB] flex flex-col justify-between min-h-screen transform transition-transform duration-200 lg:static lg:z-auto lg:w-64 lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
       <div>
         {/* Brand Header */}
         <div className="h-16 px-6 flex items-center border-b border-[#E5E7EB]">
-          <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => onViewChange('overview')}>
+          <div className="flex items-center gap-2.5 cursor-pointer min-w-0" onClick={() => handleViewChange('overview')}>
             <div className="w-8 h-8 rounded-lg bg-[#2563EB] flex items-center justify-center text-white font-bold text-base shadow-sm">
               ◈
             </div>
             <div>
-              <span className="font-bold text-base tracking-tight text-[#111827]">
+              <span className="font-bold text-base tracking-tight text-[#111827] truncate">
                 DATA<span className="text-[#2563EB]">FLOW</span>
               </span>
               <span className="text-[10px] text-[#6B7280] font-medium block -mt-1 uppercase tracking-wider">
                 Intelligence Workspace
               </span>
             </div>
+            <button onClick={onClose} className="ml-auto p-2 text-[#6B7280] lg:hidden" aria-label="Close navigation">
+              <X className="w-5 h-5" />
+            </button>
           </div>
         </div>
 
@@ -40,7 +50,7 @@ export const Sidebar = ({ currentView, onViewChange, activeJob, onSelectJob }) =
             return (
               <button
                 key={item.id}
-                onClick={() => !item.disabled && onViewChange(item.id)}
+                onClick={() => !item.disabled && handleViewChange(item.id)}
                 disabled={item.disabled}
                 className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all ${
                   isActive
@@ -91,7 +101,7 @@ export const Sidebar = ({ currentView, onViewChange, activeJob, onSelectJob }) =
           <div className="p-3 rounded-xl border border-dashed border-[#D1D5DB] text-center">
             <span className="text-xs text-[#6B7280] block mb-2">No active dataset selected</span>
             <button
-              onClick={() => onViewChange('import')}
+              onClick={() => handleViewChange('import')}
               className="px-3 py-1.5 rounded-lg bg-[#2563EB] text-white text-xs font-semibold hover:bg-[#1D4ED8] transition w-full"
             >
               + Upload CSV
@@ -99,6 +109,7 @@ export const Sidebar = ({ currentView, onViewChange, activeJob, onSelectJob }) =
           </div>
         )}
       </div>
-    </aside>
+      </aside>
+    </>
   );
 };
