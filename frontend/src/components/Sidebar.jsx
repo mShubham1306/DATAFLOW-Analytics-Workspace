@@ -21,19 +21,19 @@ export const Sidebar = ({ currentView, onViewChange, activeJob, onSelectJob, isO
       <div>
         {/* Brand Header */}
         <div className="h-16 px-6 flex items-center border-b border-[#E5E7EB]">
-          <div className="flex items-center gap-2.5 cursor-pointer min-w-0" onClick={() => handleViewChange('overview')}>
-            <div className="w-8 h-8 rounded-lg bg-[#2563EB] flex items-center justify-center text-white font-bold text-base shadow-sm">
+          <div className="flex items-center gap-2.5 cursor-pointer min-w-0 group" onClick={() => handleViewChange('import')} title="Go to home">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#2563EB] to-[#7C3AED] flex items-center justify-center text-white font-bold text-base shadow-sm group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 group-active:scale-95">
               ◈
             </div>
-            <div>
+            <div className="group-hover:translate-x-0.5 transition-transform duration-300">
               <span className="font-bold text-base tracking-tight text-[#111827] truncate">
-                DATA<span className="text-[#2563EB]">FLOW</span>
+                DATA<span className="bg-gradient-to-r from-[#2563EB] to-[#7C3AED] bg-clip-text text-transparent">FLOW</span>
               </span>
               <span className="text-[10px] text-[#6B7280] font-medium block -mt-1 uppercase tracking-wider">
                 Intelligence Workspace
               </span>
             </div>
-            <button onClick={onClose} className="ml-auto p-2 text-[#6B7280] lg:hidden" aria-label="Close navigation">
+            <button onClick={onClose} className="ml-auto p-2 text-[#6B7280] lg:hidden hover:bg-[#F3F4F6] rounded-lg transition" aria-label="Close navigation">
               <X className="w-5 h-5" />
             </button>
           </div>

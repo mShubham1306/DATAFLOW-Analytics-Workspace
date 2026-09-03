@@ -148,11 +148,26 @@ export function App() {
     }
   }, [activeJob?.status, fetchAnalytics, fetchRecords]);
 
-  // Upload handler
+  // Upload handler - after successful upload, move to overview (the app analytics view)
   const handleUploadSuccess = (newJobId) => {
     setActiveJobId(newJobId);
     setCurrentView('overview');
     fetchHistory();
+  };
+
+  // Go "home" to the landing page (import view)
+  const handleGoHome = () => {
+    setCurrentView('import');
+    setSidebarOpen(false);
+  };
+
+  // Go to overview (app analytics) - used by sample CTA when there's already an active job
+  const handleGoToApp = () => {
+    if (activeJobId) {
+      setCurrentView('overview');
+    } else {
+      setCurrentView('import');
+    }
   };
 
   // Switch job selection
@@ -197,6 +212,7 @@ export function App() {
           activeJob={activeJob}
           onMenu={() => setSidebarOpen(true)}
           onNewImport={() => setCurrentView('import')}
+          onGoHome={handleGoHome}
           onRefresh={() => {
             fetchAnalytics();
             fetchRecords();
@@ -207,7 +223,11 @@ export function App() {
         <main className="flex-1 min-w-0 p-3 sm:p-4 lg:p-6 max-w-7xl w-full mx-auto">
           {/* VIEW 1: IMPORT / LANDING PAGE */}
           {currentView === 'import' && (
-            <LandingPage onUploadSuccess={handleUploadSuccess} />
+            <LandingPage
+              onUploadSuccess={handleUploadSuccess}
+              onGoToApp={handleGoToApp}
+              hasActiveJob={!!activeJobId}
+            />
           )}
 
           {/* VIEW 2: PROCESSING SCREEN (shown if active job is currently importing) */}
@@ -219,7 +239,11 @@ export function App() {
           {currentView === 'overview' && !isProcessing && (
             <div>
               {!activeJob ? (
-                <LandingPage onUploadSuccess={handleUploadSuccess} />
+                <LandingPage
+                  onUploadSuccess={handleUploadSuccess}
+                  onGoToApp={handleGoToApp}
+                  hasActiveJob={!!activeJobId}
+                />
               ) : (
                 <div>
                   {/* Global Filter Bar */}

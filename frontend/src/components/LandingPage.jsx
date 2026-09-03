@@ -339,7 +339,7 @@ const DashboardMockup = () => {
   );
 };
 
-export const LandingPage = ({ onUploadSuccess }) => {
+export const LandingPage = ({ onUploadSuccess, onGoToApp, hasActiveJob = false }) => {
   const [dragActive, setDragActive] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -539,17 +539,28 @@ export const LandingPage = ({ onUploadSuccess }) => {
                 className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold shadow-glow hover:shadow-glow-purple transition-all duration-300 hover:scale-105 animate-pulse-glow"
               >
                 <UploadCloud className="w-5 h-5 group-hover:animate-bounce-subtle" />
-                Start Uploading Free
+                {hasActiveJob ? 'Upload New Dataset' : 'Start Uploading Free'}
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
-              <button
-                onClick={handleLoadSample}
-                disabled={uploading}
-                className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-2xl bg-white/80 backdrop-blur-md border border-gray-200 hover:bg-white text-gray-800 font-bold hover:shadow-lg transition-all duration-300 hover:scale-105 disabled:opacity-50"
-              >
-                <Play className="w-4 h-4 fill-current text-purple-500" />
-                Try Sample Dataset
-              </button>
+              {hasActiveJob ? (
+                <button
+                  onClick={onGoToApp}
+                  className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-2xl bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold hover:shadow-lg hover:shadow-emerald-500/30 transition-all duration-300 hover:scale-105"
+                >
+                  <BarChart3 className="w-5 h-5 group-hover:animate-bounce-subtle" />
+                  Go to Dashboard
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </button>
+              ) : (
+                <button
+                  onClick={handleLoadSample}
+                  disabled={uploading}
+                  className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-2xl bg-white/80 backdrop-blur-md border border-gray-200 hover:bg-white text-gray-800 font-bold hover:shadow-lg transition-all duration-300 hover:scale-105 disabled:opacity-50"
+                >
+                  <Play className="w-4 h-4 fill-current text-purple-500" />
+                  Try Sample Dataset
+                </button>
+              )}
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-3 mb-12 opacity-0-init animate-fade-in-up animate-delay-400">
@@ -862,17 +873,28 @@ export const LandingPage = ({ onUploadSuccess }) => {
               className="group inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl bg-white hover:bg-gray-50 text-gray-900 font-black text-base shadow-2xl hover:shadow-white/20 transition-all duration-300 hover:scale-105"
             >
               <UploadCloud className="w-5 h-5 text-blue-600 group-hover:animate-bounce-subtle" />
-              Upload Your First CSV
+              {hasActiveJob ? 'Upload Another CSV' : 'Upload Your First CSV'}
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
-            <button
-              onClick={handleLoadSample}
-              disabled={uploading}
-              className="inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl bg-white/10 backdrop-blur border border-white/25 hover:bg-white/20 text-white font-bold text-base transition-all duration-300 hover:scale-105 disabled:opacity-50"
-            >
-              <Play className="w-4 h-4 fill-current" />
-              Try With Sample Data
-            </button>
+            {hasActiveJob ? (
+              <button
+                onClick={onGoToApp}
+                className="group inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl bg-white/10 backdrop-blur border border-white/25 hover:bg-white/20 text-white font-bold text-base transition-all duration-300 hover:scale-105"
+              >
+                <BarChart3 className="w-5 h-5 group-hover:animate-bounce-subtle" />
+                Open Dashboard
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
+            ) : (
+              <button
+                onClick={handleLoadSample}
+                disabled={uploading}
+                className="inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl bg-white/10 backdrop-blur border border-white/25 hover:bg-white/20 text-white font-bold text-base transition-all duration-300 hover:scale-105 disabled:opacity-50"
+              >
+                <Play className="w-4 h-4 fill-current" />
+                Try With Sample Data
+              </button>
+            )}
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-6 text-white/70 text-sm">

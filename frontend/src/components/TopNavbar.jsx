@@ -1,8 +1,8 @@
 import React from 'react';
-import { Download, RefreshCw, Upload, CheckCircle2, AlertCircle, Clock, Loader2, Menu } from 'lucide-react';
+import { Download, RefreshCw, Upload, CheckCircle2, AlertCircle, Clock, Loader2, Menu, Home } from 'lucide-react';
 import { getDownloadUrl } from '../api/importsApi';
 
-export const TopNavbar = ({ activeJob, onNewImport, onRefresh, onMenu }) => {
+export const TopNavbar = ({ activeJob, onNewImport, onRefresh, onMenu, onGoHome }) => {
   const getStatusBadge = (status) => {
     switch (status) {
       case 'COMPLETED':
@@ -46,6 +46,34 @@ export const TopNavbar = ({ activeJob, onNewImport, onRefresh, onMenu }) => {
         <button onClick={onMenu} className="p-2 -ml-2 text-[#6B7280] lg:hidden" aria-label="Open navigation">
           <Menu className="w-5 h-5" />
         </button>
+
+        <button
+          onClick={onGoHome}
+          className="hidden sm:flex items-center gap-2 cursor-pointer group mr-2 pr-3 border-r border-gray-200 hover:opacity-100 transition-all"
+          title="Go to home (landing page)"
+        >
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#2563EB] to-[#7C3AED] flex items-center justify-center text-white font-black shadow-sm group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 group-active:scale-95">
+            ◈
+          </div>
+          <div className="text-left group-hover:translate-x-0.5 transition-transform duration-300">
+            <span className="font-black text-sm tracking-tight text-[#111827] block leading-none">
+              DATA<span className="bg-gradient-to-r from-[#2563EB] to-[#7C3AED] bg-clip-text text-transparent">FLOW</span>
+            </span>
+            <span className="text-[9px] text-[#6B7280] font-semibold block -mt-0.5 uppercase tracking-wider">
+              Intelligence Workspace
+            </span>
+          </div>
+        </button>
+
+        <button
+          onClick={onGoHome}
+          className="sm:hidden p-2 text-[#6B7280] hover:text-[#111827] hover:bg-[#F3F4F6] rounded-lg transition"
+          title="Go to home (landing page)"
+          aria-label="Go to home"
+        >
+          <Home className="w-5 h-5" />
+        </button>
+
         {activeJob ? (
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
