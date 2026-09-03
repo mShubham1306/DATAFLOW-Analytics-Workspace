@@ -11,7 +11,19 @@
     <img src="https://img.shields.io/badge/Tests-9%2F9%20Passing-16A34A?style=flat-square" />
   </p>
   <p><em>Upload messy CSVs &rarr; Validate every row with extensible rules &rarr; Explore data quality through interactive analytics</em></p>
+  <p>
+    <a href="https://dataflow-analytics-workspace.vercel.app/" target="_blank"><strong>🚀 Live Application (Vercel)</strong></a> &bull;
+    <a href="https://dataflow-analytics-workspace.onrender.com/docs" target="_blank"><strong>⚡ Live Swagger API (Render)</strong></a>
+  </p>
 </div>
+
+---
+
+## 🌐 Live Deployments
+
+- **Frontend Dashboard (Vercel)**: [https://dataflow-analytics-workspace.vercel.app/](https://dataflow-analytics-workspace.vercel.app/)
+- **Backend API & Swagger Docs (Render)**: [https://dataflow-analytics-workspace.onrender.com/docs](https://dataflow-analytics-workspace.onrender.com/docs)
+- **API Health Check**: [https://dataflow-analytics-workspace.onrender.com/api/health](https://dataflow-analytics-workspace.onrender.com/api/health)
 
 ---
 
