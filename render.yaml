@@ -1,0 +1,16 @@
+services:
+  # ─── FastAPI Backend ───────────────────────────────────────────────────────
+  - type: web
+    name: dataflow-api
+    runtime: python
+    region: oregon
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        value: sqlite:///./imports.db   # Ephemeral on free tier — replace with Render Postgres if you need persistence across restarts
+      - key: ALLOWED_ORIGIN
+        value: https://dataflow-analytics-workspace.vercel.app  # Update after Vercel deployment
+    healthCheckPath: /api/health

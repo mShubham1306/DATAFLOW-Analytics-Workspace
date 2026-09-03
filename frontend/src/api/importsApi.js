@@ -1,6 +1,9 @@
 import axios from 'axios';
 
-const API_BASE = '/api/imports';
+// In production (Vercel), VITE_API_URL points to the Render backend.
+// In development, Vite's proxy forwards /api -> http://127.0.0.1:8000.
+const BACKEND = import.meta.env.VITE_API_URL || '';
+const API_BASE = `${BACKEND}/api/imports`;
 
 export const uploadCsv = async (file) => {
   const formData = new FormData();
