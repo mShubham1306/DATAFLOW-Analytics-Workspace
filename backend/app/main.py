@@ -13,26 +13,39 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# ALLOWED_ORIGIN: comma-separated list of frontend origins.
-# Set to "*" to allow all origins (useful during initial deployment).
-# In production, restrict to your Vercel URL e.g.: https://my-app.vercel.app
+# ALLOWED_ORIGIN: comma-separated list of frontend origins, or "*"
 _raw_origins = os.getenv(
     "ALLOWED_ORIGIN",
-    "http://localhost:5173,http://localhost:3000,http://127.0.0.1:5173"
+    "https://dataflow-analytics-workspace.vercel.app,http://localhost:5173,http://localhost:3000,http://127.0.0.1:5173"
 )
 
-if _raw_origins.strip() == "*":
-    allowed_origins = ["*"]
+if "*" in _raw_origins:
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=False,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 else:
-    allowed_origins = [o.strip() for o in _raw_origins.split(",") if o.strip()]
+    # Normalize: strip spaces and trailing slashes so both "https://app.vercel.app/" and "https://app.vercel.app" match
+    parsed = set()
+    for o in _raw_origins.split(","):
+        cleaned = o.strip().rstrip("/")
+        if cleaned:
+            parsed.add(cleaned)
+            parsed.add(cleaned + "/")
+    # Always include the project's production Vercel domain
+    parsed.add("https://dataflow-analytics-workspace.vercel.app")
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=allowed_origins,
-    allow_credentials=allowed_origins != ["*"],  # credentials not allowed with wildcard
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=list(parsed),
+        allow_origin_regex=r"https://.*\.vercel\.app",
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
 app.include_router(imports.router)
 
