@@ -314,7 +314,49 @@ A 30-record sample with intentional validation failures is included at `sample.c
 
 ---
 
-## License
+## Deployment
+
+### Backend on Render (Free tier)
+
+1. Go to [render.com](https://render.com) → **New Web Service**
+2. Connect your GitHub repository
+3. Render will auto-detect `render.yaml` — or configure manually:
+
+| Setting | Value |
+|---------|-------|
+| **Root directory** | `backend` |
+| **Build command** | `pip install -r requirements.txt` |
+| **Start command** | `uvicorn app.main:app --host 0.0.0.0 --port $PORT` |
+| **Environment** | Python 3 |
+
+4. Add environment variable in Render dashboard:
+
+| Key | Value |
+|-----|-------|
+| `ALLOWED_ORIGIN` | `https://your-app.vercel.app` (set after Vercel deploy) |
+
+5. After deploy, copy your Render service URL (e.g. `https://dataflow-api.onrender.com`)
+
+> **Note**: Render's free tier uses an ephemeral filesystem — SQLite data resets on restart. For persistent storage, provision a **Render PostgreSQL** database and set `DATABASE_URL` to the Postgres connection string.
+
+---
+
+### Frontend on Vercel
+
+1. Go to [vercel.com](https://vercel.com) → **New Project** → import your GitHub repo
+2. Set **Root Directory** to `frontend`
+3. Add environment variable:
+
+| Key | Value |
+|-----|-------|
+| `VITE_API_URL` | `https://dataflow-api.onrender.com` (your Render URL, no trailing slash) |
+
+4. Deploy. Vercel auto-detects Vite and uses `vercel.json` for SPA routing.
+5. Copy your Vercel URL and paste it back into Render's `ALLOWED_ORIGIN` env var.
+
+---
+
+
 
 MIT License — free to use, adapt, and distribute.
 
